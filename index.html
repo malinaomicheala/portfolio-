@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(255, 255, 255, 0.06);
+      --accent: #7c3aed;
+      --accent-2: #22d3ee;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --card: rgba(255, 255, 255, 0.04);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 58, 237, 0.16), transparent 30%),
+                  radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.18), transparent 30%),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(90deg, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    nav .brand {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--accent-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 18px;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px 120px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      align-items: center;
+      padding: 40px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .hero h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      margin: 0 0 12px;
+    }
+    .hero p {
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .hero-visual {
+      display: grid;
+      gap: 16px;
+    }
+    .photo-frame {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.16), rgba(34, 211, 238, 0.1));
+    }
+    .photo-frame img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 100%;
+    }
+    .photo-caption {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #0f172a;
+      box-shadow: 0 15px 45px rgba(124, 58, 237, 0.3);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(34, 211, 238, 0.12);
+      color: var(--accent-2);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      width: fit-content;
+    }
+    section {
+      margin-top: 80px;
+    }
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    section p.lead {
+      margin-top: 0;
+      color: var(--muted);
+      max-width: 700px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(124, 58, 237, 0.5);
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+    .pill {
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .timeline {
+      border-left: 2px solid rgba(255, 255, 255, 0.12);
+      margin-top: 24px;
+      padding-left: 20px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 18px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -31px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.12);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    form {
+      display: grid;
+      gap: 12px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+    }
+    input:focus, textarea:focus {
+      outline: 2px solid rgba(124, 58, 237, 0.6);
+    }
+    footer {
+      text-align: center;
+      padding: 28px 12px 40px;
+      color: var(--muted);
+    }
+    @media (max-width: 640px) {
+      nav { flex-direction: column; gap: 10px; align-items: flex-start; }
+      nav a { margin-left: 0; margin-right: 14px; }
+      .container { padding: 40px 16px 80px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="brand">
+        <span>●</span> Micheala Malinao
+      </div>
+      <div>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero" id="top">
+      <div>
+        <div class="tag">Product designer • Frontend developer</div>
+        <h1>I build elegant, resilient digital experiences.</h1>
+        <p>Hi, I am Aurora — a multi-disciplinary maker crafting web products that feel intentional, accessible, and just a bit unexpected. I love pairing strong UX thinking with expressive UI systems.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">View selected work</button>
+          <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get in touch</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <figure class="photo-frame">
+          <img src="https://scontent.fdvo1-2.fna.fbcdn.net/v/t39.30808-6/598607392_1983098265589926_3432471896568111119_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHUOcoOjRrbrJOKjkSI0jvTZ4Hxs_oKogxngfGz-gqiDAA_7uaBbueNph75h0i1_L9GqmRchGB6VuczvdbqavUT&_nc_ohc=wov9whM4xWwQ7kNvwFHpBTk&_nc_oc=Adl4wECkSZHLo5mTohtmCo6VzXbmVpMuwd_OjhiSpiXQz1xFuuAo1eAMdsPVc32uwoo&_nc_zt=23&_nc_ht=scontent.fdvo1-2.fna&_nc_gid=F7NXPCtTOLj4fvgfgk5vMA&oh=00_Afl4etYrVNYc6Ke1d1H24Q7B3EegHn0xjfpJnB4jjTj0vA&oe=6941FE02" alt="Portrait of Aurora smiling with a blurred studio background">
+          <figcaption class="photo-caption">Based in Montreal · Remote worldwide</figcaption>
+        </figure>
+        <div class="card" aria-hidden="true">
+          <h3>Snapshot</h3>
+          <div class="pill-row">
+            <span class="pill">UX Audits</span>
+            <span class="pill">Design Systems</span>
+            <span class="pill">Web Apps</span>
+          </div>
+          <p>Currently freelancing with climate tech teams to make complex tools inviting. Previously at a B2B SaaS scale-up leading the design system and front-end foundation.</p>
+          <div class="pill-row">
+            <span class="pill">Figma</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">React</span>
+            <span class="pill">Storybook</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p class="lead">Curious generalist who cares deeply about clarity, speed, and delight. I move from problem framing to shipped pixels with tight feedback loops.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>What drives me</h3>
+          <p>I enjoy working on products that matter: sustainability, creative tools, and AI that helps humans focus. My process mixes structured research with quick prototyping.</p>
+        </div>
+        <div class="card">
+          <h3>Ways I work</h3>
+          <p>Remote-first collaborator, transparent communicator, and a fan of docs over meetings. I partner closely with engineers to make sure interactions feel effortless.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Selected Projects</h2>
+      <p class="lead">A few highlights across different problem spaces. More available on request.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>ClimaDash</h3>
+          <p>Analytics cockpit for climate risk teams with customizable data stories, built with modular charts and live collaboration.</p>
+          <div class="pill-row">
+            <span class="pill">React</span><span class="pill">D3</span><span class="pill">Realtime</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Northwind OS</h3>
+          <p>Design system and component library powering a suite of enterprise tools. Delivered tokens, accessibility foundations, and Storybook.</p>
+          <div class="pill-row">
+            <span class="pill">Design Systems</span><span class="pill">Storybook</span><span class="pill">Accessibility</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Sonar AI</h3>
+          <p>Intelligent assistant that turns unstructured support logs into summaries and insights, with human-in-the-loop workflows.</p>
+          <div class="pill-row">
+            <span class="pill">UX Research</span><span class="pill">Flows</span><span class="pill">Prompt Design</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Lumen</h3>
+          <p>Minimal personal productivity app combining focus timers, playlists, and lightweight journaling.</p>
+          <div class="pill-row">
+            <span class="pill">iOS</span><span class="pill">Branding</span><span class="pill">Motion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills & Tools</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Full-stack UX</h3>
+          <div class="pill-row">
+            <span class="pill">Product Strategy</span>
+            <span class="pill">Workshops</span>
+            <span class="pill">Prototyping</span>
+            <span class="pill">User Testing</span>
+          </div>
+          <p>Systems thinker with a bias for building. I map journeys, test assumptions quickly, and translate insights into interfaces engineers can ship.</p>
+        </div>
+        <div class="card">
+          <h3>Front-end craft</h3>
+          <div class="pill-row">
+            <span class="pill">TypeScript</span>
+            <span class="pill">React</span>
+            <span class="pill">CSS</span>
+            <span class="pill">Accessibility</span>
+            <span class="pill">Testing</span>
+          </div>
+          <p>I care about performance and detail—keyboard navigation, responsive layouts, and thoughtful motion that supports comprehension.</p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <h3>Senior Product Designer · Freelance</h3>
+          <p class="muted">2022 — Present</p>
+          <p>Partnered with climate tech and developer tools teams. Shipped design systems and data-heavy UIs.</p>
+        </div>
+        <div class="timeline-item">
+          <h3>Product Design Lead · Northwind</h3>
+          <p class="muted">2019 — 2022</p>
+          <p>Led the design system initiative, established accessibility standards, and co-built the shared front-end foundations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="lead">Have a project or idea? I am open to select collaborations.</p>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Let us talk</h3>
+          <p>Email me at <a href="mailto:hello@aurorastudio.dev">malinaomicheala@gmail.com</a> or drop a note below.</p>
+        </div>
+        <div class="card">
+          <form>
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" placeholder="Your name">
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="Your email">
+            </label>
+            <label>
+              <span>Project</span>
+              <textarea name="message" rows="4" placeholder="Tell me about your idea"></textarea>
+            </label>
+            <button class="btn btn-primary" type="button" onclick="alert('Thanks! This demo does not submit, but you can email me directly.')">Send message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div>Crafted with care · 2025 · Aurora Studio</div>
+  </footer>
+</body>
+</html>
+
+
